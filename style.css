@@ -1,0 +1,199 @@
+/* Tema inspirado na Netflix */
+/* Os comentários explicam cada bloco de estilo */
+:root {
+  /* variáveis de cor para manter a paleta consistente */
+  --bg: #000000;
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-strong: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --muted: #aaa;
+  --accent: transparent;
+  --button-bg: rgba(255, 255, 255, 0.05);
+  --button-border: rgba(255, 255, 255, 0.15);
+}
+
+body.light-mode {
+  /* cores alternativas para o modo claro */
+  --bg: #f4f4f5;
+  --text: #111111;
+  --panel: rgba(0, 0, 0, 0.04);
+  --panel-strong: rgba(0, 0, 0, 0.08);
+  --button-bg: rgba(0, 0, 0, 0.06);
+  --button-border: rgba(0, 0, 0, 0.15);
+}
+
+html, body {
+  /* garante que o corpo ocupe toda a altura da tela */
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  /* fundo escuro com leve textura de gradiente */
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+header {
+  /* cabeçalho com título e botão centralizados */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  text-align: center;
+  padding-top: 5rem;
+}
+
+.logo {
+  /* logo fixa no canto superior esquerdo */
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: 48px;
+  height: auto;
+  z-index: 10;
+}
+
+h1 {
+  /* título mais abaixo na página */
+  margin: 0;
+  margin-top: 3rem;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  max-width: 800px;
+}
+
+button#themeToggle {
+  /* botão para alternar entre light e dark */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  margin: 0;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  z-index: 11;
+  transition: background-color 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+
+button#themeToggle:hover,
+button#themeToggle:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.container {
+  /* grade responsiva para os perfis */
+  width: min(1100px, 100%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.profile {
+  /* remove o estilo de card e mantém apenas o layout da imagem/nome */
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0.6rem 0;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: transform 260ms ease;
+}
+
+.profile:hover {
+  /* leve elevação ao passar o mouse */
+  transform: translateY(-2px);
+}
+
+.profile img {
+  /* imagem do perfil em formato quadrado com cantos arredondados */
+  width: 100%;
+  height: auto;
+  max-width: 180px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+img:hover {
+  /* destaque visual no hover da imagem */
+  border-color: rgb(255, 255, 255);
+}
+
+.profile p {
+  /* nome do usuário abaixo da imagem */
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: capitalize;
+}
+
+body::before {
+  /* camada de brilho suave sobre o fundo */
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(0, 0, 0, 0), transparent 25%),
+    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08), transparent 20%);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+@media (max-width: 520px) {
+  body {
+    /* menos espaçamento em telas pequenas */
+    padding: 1rem 0.75rem;
+    gap: 1.25rem;
+  }
+
+  header {
+    padding-top: 3rem;
+  }
+
+  h1 {
+    margin-top: 1.5rem;
+    font-size: clamp(1.75rem, 8vw, 2.4rem);
+  }
+
+  .logo {
+    left: 0.75rem;
+    top: 0.75rem;
+    width: 36px;
+  }
+
+  button#themeToggle {
+    width: min(100%, 240px);
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .container {
+    /* reduz o espaçamento entre perfis em dispositivos móveis */
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+}
